@@ -39,6 +39,7 @@ exports.create = async (req, res) => {
             pays: Joi.string().required(),
         }),
         telephone: Joi.number().required(),
+        password: Joi.string().required()
     });
     const { body } = req;
     const { error, value } = await schema.validate(body);

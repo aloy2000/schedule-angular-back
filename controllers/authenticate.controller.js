@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
             const isPasswordMatch = await bcrypt.compare(password, userIsEtudiant.password)
             if (isPasswordMatch) {
                 const token = jwt.sign({ id: userIsEtudiant._id, username: userIsEtudiant.username }, 'eskdlfdsllamamfaf12456500122f132165465465dfsd');
-                return res.status(200).send({ token, role: 'etudiant' });
+                return res.status(200).send({ token, role: 'etudiant', id: userIsEtudiant._id });
             }
             return res.status(404).json({ message: 'invalid password' })
         }
@@ -63,7 +63,7 @@ exports.login = async (req, res) => {
             const isPasswordMatch = await bcrypt.compare(password, userIsProf.password)
             if (isPasswordMatch) {
                 const token = jwt.sign({ id: userIsProf._id, username: userIsProf.email }, 'eskdlfdsllamamfaf12456500122f132165465465dfsd');
-                return res.status(200).json({ token, role: 'professeur' });
+                return res.status(200).json({ token, role: 'professeur',id: userIsProf._id });
             }
             return res.status(404).send({ message: 'invalid password' })
         }
